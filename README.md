@@ -1,4 +1,7 @@
-IMAGEM DO CANHAO E DA MOSCA
+![image](https://github.com/user-attachments/assets/f7de91cc-2e54-4b92-9a04-822125281a8a)
+
+
+# Kafka o canhao do processamento assincrono?
 
 ### O que é Apache Kafka?
 
@@ -8,21 +11,26 @@ Analogia: pense no Kafka como uma esteira de produção – os dados (eventos) e
 
 ### Conceitos principais
 
-| Conceito         | Definição |
-|------------------|-----------|
-| **Broker**       | Servidor Kafka responsável por armazenar e entregar mensagens. |
-| **Topic**        | Categoria onde as mensagens são publicadas. |
-| **Partition**    | Subdivisão de um tópico usada para escalar e distribuir mensagens. |
-| **Producer**     | Quem envia mensagens para o Kafka. |
-| **Consumer**     | Quem lê mensagens do Kafka. |
-| **Consumer Group** | Um grupo de consumidores que divide o trabalho entre as partições. |
-| **Offset**       | Marcador da posição de leitura de um consumidor dentro de uma partição. |
+| Conceito           | Definição                                                                 |
+|--------------------|--------------------------------------------------------------------------|
+| **Broker**         | Servidor Kafka responsável por armazenar e entregar mensagens.           |
+| **Topic**          | Categoria onde as mensagens são publicadas.                              |
+| **Partition**      | Subdivisão de um tópico usada para escalar e distribuir mensagens.       |
+| **Producer**       | Quem envia mensagens para o Kafka.                                       |
+| **Consumer**       | Quem lê mensagens do Kafka.                                              |
+| **Consumer Group** | Um grupo de consumidores que divide o trabalho entre as partições.       |
 
+O Kafka funciona como uma central de transporte de eventos. O fluxo básico é o seguinte:
 
-![image](https://github.com/user-attachments/assets/a2f7e01d-4b9f-4f01-925c-7416f9562f8e)
+1. Producers enviam mensagens para um tópico.
+2. O tópico é dividido em partições, que ficam armazenadas nos brokers.
+3. Cada partição mantém a ordem das mensagens.
+4. Consumers, organizados em consumer groups, leem as mensagens dessas partições.
+5. Dentro de um mesmo group, cada partição é lida por apenas um consumer.
 
+#### Importante: o Kafka **não apaga a mensagem após o consumo**. A retenção é feita com base em tempo ou tamanho.
 
-## Cálculo de partição no Kafka com chave
+Internamento o kafka usa uma seria de funcoes para decidir o melhor caminho para um evento/mensagem seguir, por exempl, abaixo temos como um producer decide para qual particao uma mesagem é enviada de acordo com a sua chave.
 
 ```text
 chave = "cliente_1"
@@ -32,11 +40,9 @@ número_de_partições = 3
 partição = 83428 % 3 = 1
 
 Portanto, a mensagem com chave "cliente_1" será direcionada para a partição 1
-```
 
 ### Calculando o módulo manualmente (em calculadora comum):
 
-```text
 1. Divida o hash pelo número de partições:
    83428 ÷ 3 = 27809,333...
 
@@ -51,5 +57,4 @@ Portanto, a mensagem com chave "cliente_1" será direcionada para a partição 1
 
 Resultado final:
    83428 % 3 = 1
-```
 
