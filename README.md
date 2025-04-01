@@ -96,5 +96,4 @@ Resultado final:
 | Consumer groups            | Divide mensagens entre consumidores                  | Não há equivalente direto a consumer group        |
 | Tempo real                 | Projetado para baixa latência                        | Maior latência, adequado para uso geral           |
 | Infraestrutura             | Requer gerenciamento de cluster (ou uso de MSK/Confluent Cloud) | Totalmente gerenciado pela AWS           |
-| Replay de mensagens        | Possível via offset manual                           | Não suportado nativamente                         |
 | Throughput                 | Muito alto                                           | Alto, mas menor comparado ao Kafka                |
