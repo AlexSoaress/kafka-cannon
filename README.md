@@ -3,6 +3,26 @@
 
 # Kafka o canhao do processamento assincrono?
 
+### O que é mensageria?
+
+Mensageria é um modelo de comunicação assíncrona onde sistemas trocam informações por meio de intermediários, como filas ou tópicos.
+
+Um produtor envia uma **mensagem** com dados necessários para outro sistema executar uma ação. Essa mensagem é colocada em uma fila e lida por um consumidor, geralmente de forma ordenada e direta.
+
+Esse modelo facilita o desacoplamento, melhora a resiliência e permite que os sistemas funcionem de forma independente.
+
+### O que são eventos?
+
+Eventos são notificações de que **algo aconteceu** em um sistema. Por exemplo: "pagamento confirmado", "usuário cadastrado", "produto atualizado".
+
+Diferente da mensageria tradicional, os eventos são publicados em **tópicos** e podem ser consumidos por **vários sistemas ao mesmo tempo**.  
+O produtor não sabe (nem precisa saber) quem vai consumir o evento, e os consumidores escolhem o que fazer com ele.
+
+### Diferença fundamental
+
+A **mensagem** é geralmente direcionada de um sistema para outro, com intenção clara e controle da ação — é um modelo **um para um** (1:1).  
+O **evento** é uma notificação genérica, publicada sem destino fixo, e pode ser consumido por múltiplos sistemas — é um modelo **um para muitos** (1:N).
+
 ### O que é Apache Kafka?
 
 Apache Kafka é uma plataforma distribuída de streaming de eventos. Ele permite **publicar**, **armazenar** e **consumir** fluxos contínuos de dados em tempo real.
@@ -61,10 +81,6 @@ Portanto, a mensagem com chave "cliente_1" será direcionada para a partição 1
 Resultado final:
    83428 % 3 = 1
 ```
-
-Mensageria, em termos simplistas, refere-se à troca de mensagens através de componentes intermediários. Ela se baseia na produção e consumo, onde um produtor interessado em notificar e estimular comportamentos em outro componente subsequente, envia os dados necessários para que essa finalidade seja concluída com êxito, e esses dados são enfileirados em uma queue, ou fila, onde são recebidos pelo sistema destino de forma ordenada, ou não. Estabelecer um canal comum entre o destinatário e remetente da mensagem é uma premissa para que esse tipo de abordagem funcione bem.
-
-
 ![image](https://github.com/user-attachments/assets/b50dbc6f-e048-4cb6-87c9-d26e74727f09)
 
 ## Kafka vs SQS – Principais Diferenças
