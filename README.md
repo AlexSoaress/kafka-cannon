@@ -97,3 +97,6 @@ Resultado final:
 | Tempo real                 | Projetado para baixa latência                        | Maior latência, adequado para uso geral           |
 | Infraestrutura             | Requer gerenciamento de cluster (ou uso de MSK/Confluent Cloud) | Totalmente gerenciado pela AWS           |
 | Throughput                 | Muito alto                                           | Alto, mas menor comparado ao Kafka                |
+
+Referencias:
+https://fidelissauro.dev/mensageria-eventos-streaming/
