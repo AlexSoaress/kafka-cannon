@@ -11,6 +11,8 @@ Um produtor envia uma **mensagem** com dados necessários para outro sistema exe
 
 Esse modelo facilita o desacoplamento, melhora a resiliência e permite que os sistemas funcionem de forma independente.
 
+![image](https://github.com/user-attachments/assets/b50dbc6f-e048-4cb6-87c9-d26e74727f09)
+
 ### O que são eventos?
 
 Eventos são notificações de que **algo aconteceu** em um sistema. Por exemplo: "pagamento confirmado", "usuário cadastrado", "produto atualizado".
@@ -18,10 +20,12 @@ Eventos são notificações de que **algo aconteceu** em um sistema. Por exemplo
 Diferente da mensageria tradicional, os eventos são publicados em **tópicos** e podem ser consumidos por **vários sistemas ao mesmo tempo**.  
 O produtor não sabe (nem precisa saber) quem vai consumir o evento, e os consumidores escolhem o que fazer com ele.
 
+![image](https://github.com/user-attachments/assets/f45a86ed-ed1f-41ee-8604-31d83cbd8fa5)
+
+
 ### Diferença fundamental
 
-A **mensagem** é geralmente direcionada de um sistema para outro, com intenção clara e controle da ação — é um modelo **um para um** (1:1).  
-O **evento** é uma notificação genérica, publicada sem destino fixo, e pode ser consumido por múltiplos sistemas — é um modelo **um para muitos** (1:N).
+A **mensagem** é geralmente direcionada de um sistema para outro, com intenção clara e controle da ação — é um modelo **um para um** (1:1). O **evento** é uma notificação genérica, publicada sem destino fixo, e pode ser consumido por múltiplos sistemas — é um modelo **um para muitos** (1:N).
 
 ### O que é Apache Kafka?
 
@@ -30,6 +34,7 @@ Apache Kafka é uma plataforma distribuída de streaming de eventos. Ele permite
 Analogia: pense no Kafka como uma esteira de produção – os dados (eventos) entram, seguem por essa esteira (tópico), e os consumidores pegam o que precisam.
 
 ### Conceitos principais
+![image](https://github.com/user-attachments/assets/5c56e735-d914-4348-9b84-b2abdb311572)
 
 | Conceito           | Definição                                                                 |
 |--------------------|--------------------------------------------------------------------------|
@@ -39,9 +44,6 @@ Analogia: pense no Kafka como uma esteira de produção – os dados (eventos) e
 | **Producer**       | Quem envia mensagens para o Kafka.                                       |
 | **Consumer**       | Quem lê mensagens do Kafka.                                              |
 | **Consumer Group** | Um grupo de consumidores que divide o trabalho entre as partições.       |
-
-![image](https://github.com/user-attachments/assets/5c56e735-d914-4348-9b84-b2abdb311572)
-
 
 O Kafka funciona como uma central de transporte de eventos. O fluxo básico é o seguinte:
 
@@ -81,8 +83,6 @@ Portanto, a mensagem com chave "cliente_1" será direcionada para a partição 1
 Resultado final:
    83428 % 3 = 1
 ```
-![image](https://github.com/user-attachments/assets/b50dbc6f-e048-4cb6-87c9-d26e74727f09)
-
 ## Kafka vs SQS – Principais Diferenças
 
 | Característica              | Apache Kafka                                         | Amazon SQS                                         |
