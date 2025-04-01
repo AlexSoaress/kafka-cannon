@@ -98,5 +98,7 @@ Resultado final:
 | Infraestrutura             | Requer gerenciamento de cluster (ou uso de MSK/Confluent Cloud) | Totalmente gerenciado pela AWS           |
 | Throughput                 | Muito alto                                           | Alto, mas menor comparado ao Kafka                |
 
+# Hands on
+
 Referencias:
 https://fidelissauro.dev/mensageria-eventos-streaming/
