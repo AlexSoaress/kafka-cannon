@@ -20,6 +20,9 @@ Analogia: pense no Kafka como uma esteira de produção – os dados (eventos) e
 | **Consumer**       | Quem lê mensagens do Kafka.                                              |
 | **Consumer Group** | Um grupo de consumidores que divide o trabalho entre as partições.       |
 
+![image](https://github.com/user-attachments/assets/5c56e735-d914-4348-9b84-b2abdb311572)
+
+
 O Kafka funciona como uma central de transporte de eventos. O fluxo básico é o seguinte:
 
 1. Producers enviam mensagens para um tópico.
@@ -57,4 +60,25 @@ Portanto, a mensagem com chave "cliente_1" será direcionada para a partição 1
 
 Resultado final:
    83428 % 3 = 1
+```
 
+Mensageria, em termos simplistas, refere-se à troca de mensagens através de componentes intermediários. Ela se baseia na produção e consumo, onde um produtor interessado em notificar e estimular comportamentos em outro componente subsequente, envia os dados necessários para que essa finalidade seja concluída com êxito, e esses dados são enfileirados em uma queue, ou fila, onde são recebidos pelo sistema destino de forma ordenada, ou não. Estabelecer um canal comum entre o destinatário e remetente da mensagem é uma premissa para que esse tipo de abordagem funcione bem.
+
+
+![image](https://github.com/user-attachments/assets/b50dbc6f-e048-4cb6-87c9-d26e74727f09)
+
+## Kafka vs SQS – Principais Diferenças
+
+| Característica              | Apache Kafka                                         | Amazon SQS                                         |
+|----------------------------|------------------------------------------------------|---------------------------------------------------|
+| Tipo                       | Plataforma de streaming de eventos                   | Fila de mensagens gerenciada                      |
+| Entrega                    | Publish-subscribe (vários consumidores)              | Point-to-point (uma mensagem por consumidor)      |
+| Persistência               | Armazena mensagens por tempo configurável (ex: 7 dias) | Mensagens expiram após X tempo ou leitura        |
+| Ordem                      | Garante ordem por partição                           | Garante ordem apenas na FIFO queue (com custo adicional) |
+| Escalabilidade             | Escala horizontal com partições                      | Escala automaticamente, sem controle fino         |
+| Retenção                   | Baseada em tempo ou tamanho, mesmo após consumo      | Mensagens são removidas após leitura              |
+| Consumer groups            | Divide mensagens entre consumidores                  | Não há equivalente direto a consumer group        |
+| Tempo real                 | Projetado para baixa latência                        | Maior latência, adequado para uso geral           |
+| Infraestrutura             | Requer gerenciamento de cluster (ou uso de MSK/Confluent Cloud) | Totalmente gerenciado pela AWS           |
+| Replay de mensagens        | Possível via offset manual                           | Não suportado nativamente                         |
+| Throughput                 | Muito alto                                           | Alto, mas menor comparado ao Kafka                |
