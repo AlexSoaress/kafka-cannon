@@ -119,7 +119,7 @@ Criando o ambiente virtual do python:
 ```python3 -m venv .venv```  
 Ativando o ambinte virtual:  
 ```source .venv/bin/activate```  
-Intalando as libs
+Intalando as libs:  
 ```pip install -r requirements.txt```
 
 Referencias:  
