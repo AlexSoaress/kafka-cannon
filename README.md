@@ -109,6 +109,10 @@ Depois, vamos rodar dois scripts simples: um para **enviar dados simulados** (pr
 2. Executar o script de envio de mensagens
 3. Executar o script de leitura de mensagens
 
+**Comandos uteis:**
+
+```docker run --rm confluentinc/cp-kafka:7.6.1 kafka-storage random-uuid ```
+
 Referencias:  
 https://fidelissauro.dev/mensageria-eventos-streaming/  
 https://docs.confluent.io/cloud/current/get-started/index.html  
