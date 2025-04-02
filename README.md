@@ -98,7 +98,79 @@ Resultado final:
 | Infraestrutura             | Requer gerenciamento de cluster (ou uso de MSK/Confluent Cloud) | Totalmente gerenciado pela AWS           |
 | Throughput                 | Muito alto                                           | Alto, mas menor comparado ao Kafka                |
 
-# Hands on
+# Hands-on
+
+Neste laboratório, vamos executar o Kafka utilizando Docker com as imagens oficiais da Confluent.  
+Depois, vamos rodar dois scripts simples: um para **enviar dados simulados** (producer) e outro para **consumir esses dados** (consumer).
+
+### Etapas
+
+1. Subir o Kafka com Docker
+2. Executar o script de envio de mensagens
+3. Executar o script de leitura de mensagens
+
+
+```yaml
+version: '2.4'
+services:
+  broker:
+    image: confluentinc/cp-kafka:7.9.0
+    hostname: broker
+    container_name: broker
+    ports:
+      - "9092:9092"
+      - "9101:9101"
+    mem_limit: 512m           
+    mem_reservation: 256m     
+    cpus: '0.5'               
+    cpuset: "0"             
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_JMX_PORT: 9101
+      KAFKA_JMX_HOSTNAME: localhost
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@broker:29093'
+      KAFKA_LISTENERS: 'PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      CLUSTER_ID: '9Iy2hnbOTzuWmQmrugAa6g'
+    volumes:
+      - kafka_data:/var/lib/apache_kafka/data
+    networks:
+      - kafka-network
+  control-center:
+    image: confluentinc/cp-enterprise-control-center:7.6.1
+    hostname: control-center
+    container_name: control-center
+    depends_on:
+      - broker
+    ports:
+      - "9021:9021"
+    mem_limit: 256m           
+    mem_reservation: 128m    
+    cpus: '0.5'              
+    cpuset: "0"               
+    environment:
+      CONTROL_CENTER_BOOTSTRAP_SERVERS: 'broker:29092'
+      CONTROL_CENTER_REPLICATION_FACTOR: 1
+      CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
+      CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
+      CONFLUENT_METRICS_TOPIC_REPLICATION: 1
+      PORT: 9021
+    networks:
+      - kafka-network
+volumes:
+  kafka_data:
+networks:
+  kafka-network:
+```
 
 Referencias:
 https://fidelissauro.dev/mensageria-eventos-streaming/
