@@ -111,7 +111,16 @@ Depois, vamos rodar dois scripts simples: um para **enviar dados simulados** (pr
 
 **Comandos uteis:**
 
-```docker run --rm confluentinc/cp-kafka:7.6.1 kafka-storage random-uuid ```
+Obter o UUID para o cluster:  
+```docker run --rm confluentinc/cp-kafka:7.6.1 kafka-storage random-uuid```  
+Subir o compose com o kafka:  
+```docker-compose up -d```  
+Criando o ambiente virtual do python:  
+```python3 -m venv .venv```  
+Ativando o ambinte virtual:  
+```source .venv/bin/activate```  
+Intalando as libs
+```pip install -r requirements.txt```
 
 Referencias:  
 https://fidelissauro.dev/mensageria-eventos-streaming/  
