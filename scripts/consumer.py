@@ -15,7 +15,7 @@ conf = {
 consumer = Consumer(conf)
 consumer.subscribe([TOPPIC])
 
-print("▶️ Iniciando benchmark do consumo...")
+print("Iniciando benchmark do consumo...")
 
 message_count = 0
 start_time = time.time()
@@ -37,6 +37,6 @@ finally:
     end_time = time.time()
     consumer.close()
     duration = end_time - start_time
-    print(f"\n✅ Leitura finalizada: {message_count} mensagens em {duration:.2f} segundos.")
+    print(f"\nLeitura finalizada: {message_count} mensagens em {duration:.2f} segundos.")
     if duration > 0:
-        print(f"📊 Taxa média de consumo: {message_count / duration:.2f} msgs/seg")
+        print(f"Taxa média de consumo: {message_count / duration:.2f} msgs/seg")
